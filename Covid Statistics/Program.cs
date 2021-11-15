@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Covid_Statistics
 {
@@ -158,7 +158,7 @@ namespace Covid_Statistics
         static void reportRange()
         {
             Console.Clear();
-            Console.WriteLine("1 digit - display a day | 2 digits - display a range | 'A' - display all days");
+            Console.WriteLine("1 digit - display a day | 2 digits separated by spaces - display a range | 'A' - display all days");
             int a, b;
             string[] substrings;
             do
@@ -220,7 +220,7 @@ namespace Covid_Statistics
         static void editRange()
         {
             Console.Clear();
-            Console.WriteLine("1 digit - edit a day | 2 digits - edit a range | 'A' - edit all days");
+            Console.WriteLine("1 digit - edit a day | 2 digits separated by spaces - edit a range | 'A' - edit all days");
             int a, b;
             string[] substrings;
             do
@@ -270,7 +270,7 @@ namespace Covid_Statistics
         static void deleteRange()
         {
             Console.Clear();
-            Console.WriteLine("1 digit - delete a day | 2 digits - delete a range | 'A' - delete all days");
+            Console.WriteLine("1 digit - delete a day | 2 digits separated by spaces - delete a range | 'A' - delete all days");
             int a, b;
             string[] substrings;
             do
@@ -433,7 +433,8 @@ namespace Covid_Statistics
             {
                 for (int i = cases.Length - (int)n; i < cases.Length; i++)
                 {
-                    int value = (int)Math.Round((double)(cases[i - 5] + cases[i - 6] + cases[i - 7] + cases[i - 8] + cases[i - 9] + cases[i - 10] + cases[i - 11] - (cases[i - 1] + cases[i - 2] + cases[i - 3] + cases[i - 4] + cases[i - 5] + cases[i - 6])));
+                    double R = Math.Round((double)(cases[i - 7] + cases[i - 1] + cases[i - 2] + cases[i - 3] + cases[i - 4] + cases[i - 5] + cases[i - 6]) * 100.0 / (double)(cases[i - 7] + cases[i - 8] + cases[i - 9] + cases[i - 10] + cases[i - 11] + cases[i - 12] + cases[i - 6])) / 100.0;
+                    int value = (int)Math.Round(R * (double)(cases[i - 5] + cases[i - 6] + cases[i - 7] + cases[i - 8] + cases[i - 9] + cases[i - 10] + cases[i - 11] - (double)(cases[i - 1] + cases[i - 2] + cases[i - 3] + cases[i - 4] + cases[i - 5] + cases[i - 6])));
                     cases[i] = value;
                 }
                 report(cases.Length - (int)n - 1, cases.Length - 1);

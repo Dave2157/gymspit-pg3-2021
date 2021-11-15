@@ -5,6 +5,7 @@ namespace Covid_Statistics
     class Program
     {
         static int[] cases = new int[0];
+        static bool debug = false;
         static int min(int[] array, out int index)
         {
             int min = int.MaxValue;
@@ -47,7 +48,8 @@ namespace Covid_Statistics
             Console.WriteLine("2 - Edit values");
             Console.WriteLine("3 - Delete values");
             Console.WriteLine("4 - Show report");
-            Console.WriteLine("5 - Graph");
+            Console.WriteLine("5 - Predict");
+            Console.WriteLine("6 - Graph");
             Console.WriteLine("0 - Quit");
             int choice;
 
@@ -56,6 +58,11 @@ namespace Covid_Statistics
         }
         static void enter()
         {
+            if (debug)
+            {
+                cases = new int[21] { 1000, 1500, 2000, 5000, 10000, 6000, 4000, 1000, 1000, 3000, 2000, 1000, 1000, 1500, 1500, 2000, 3000, 5000, 7500, 8500, 9000 };
+                return;
+            }
             Console.Clear();
             Console.WriteLine("Enter a series of positive numbers separated by spaces");
             string input = Console.ReadLine();
@@ -92,6 +99,18 @@ namespace Covid_Statistics
         }
         static void report(int b, int e)
         {
+            if (cases.Length == 0)
+                return;
+
+            if (b < 0)
+                b = 0;
+            if (b > cases.Length - 1)
+                b = cases.Length - 1;
+            if (e < b)
+                e = b + 1;
+            if (e > cases.Length - 1)
+                e = cases.Length - 1;
+
             Console.Clear();
             int[] work = new int[e - b];
             for (int i = b, j = 0; i < e; i++, j++)
@@ -113,13 +132,20 @@ namespace Covid_Statistics
             {
                 float average = (float)work[i] / 100.0f;
                 double R = 0;
-                if (i >= 14)
-                     R = Math.Round((double)(work[i] + work[i - 1] + work[i - 2] + work[i - 3] + work[i - 4] + work[i - 5] + work[i - 6]) * 100.0 / (double)(work[i - 7] + work[i - 8] + work[i - 9] + work[i - 10] + work[i - 11] + work[i - 12] + work[i - 13])) / 100.0;
+                double A7 = 0;
+                double A14 = 0;
+                if (i >= 11)
+                     R = Math.Round((double)(work[i] + work[i - 1] + work[i - 2] + work[i - 3] + work[i - 4] + work[i - 5] + work[i - 6]) * 100.0 / (double)(work[i - 7] + work[i - 8] + work[i - 9] + work[i - 10] + work[i - 11] + work[i - 5] + work[i - 6])) / 100.0;
+                if (i >= 13)
+                     A14 = (double)(work[i] + work[i - 1] + work[i - 2] + work[i - 3] + work[i - 4] + work[i - 5] + work[i - 6] + work[i - 7] + work[i - 8] + work[i - 9] + work[i - 10] + work[i - 11] + work[i - 12] + work[i - 13] / 100);
+                if (i >= 6)
+                    A7 = (double)(work[i] + work[i - 1] + work[i - 2] + work[i - 3] + work[i - 4] + work[i - 5] + work[i - 6] / 100);
+                
                 Console.Write("Day " + (b + i));
                 int currentIndexLength = i > 1 ? i % 10 == 0 ? (int)Math.Log(i) : (int)Math.Ceiling(Math.Log10(i)) : 1; //velmi přehledný statement
                 for (int j = -1; j < biggestIndexLength - currentIndexLength; j++)
                     Console.Write(' ');
-                Console.WriteLine("- Infected: " + work[i] + "; Average 100 000 group: " + average + (i >= 14 ? ("; R: " + R) : ""));
+                Console.WriteLine("- Infected: " + work[i] + "; Average 100 000 group: " + average + (i >= 11 ? ("; R: " + R) : "") + (i >= 6 ? "; A7: " + A7 : "") + (i >= 13 ? "; A14: " + A14 : ""));
             }
             Console.Write('\n');
             Console.WriteLine("The highest number of infections: " + max + ", day " + maxIndex);
@@ -158,6 +184,13 @@ namespace Covid_Statistics
         }
         static void edit(int b, int e)
         {
+            if (cases.Length == 0)
+                return;
+
+            if (b < 0)
+                b = 0;
+            if (b > cases.Length - 1)
+                b = cases.Length - 1;
             Console.Clear();
             Console.WriteLine("Enter a series of positive numbers separated by spaces");
             string input = Console.ReadLine();
@@ -213,6 +246,18 @@ namespace Covid_Statistics
         }
         static void delete(int b, int e)
         {
+            if (cases.Length == 0)
+                return;
+            if (b < 0)
+                b = 0;
+            if (e < b)
+                e = b + 1;
+            if (b > cases.Length - 1)
+                b = cases.Length - 1;
+            if (e > cases.Length - 1)
+                e = cases.Length - 1;
+            if (e > cases.Length - 1)
+                e = cases.Length - 1;
             int[] temp = new int[cases.Length - e - 1 + b];
             for (int i = 0, j = 0; i < cases.Length; i++)
                 if (i < b || i > e)
@@ -245,25 +290,60 @@ namespace Covid_Statistics
         tohleFaktAsiNeniUplneKoserReseniTohohleProblemu:
             delete();
         }
-        static void graph()
+        static void graph(int offset)
         {
             Console.Clear();
-            if (cases.Length == 0)
+            if (cases.Length < 14)
                 return;
+
             int maxVal = max(cases);
-            int step = (int) (Math.Pow(10.0, Math.Ceiling(Math.Log10(maxVal))) / 5.0);
-            char[][] output = new char[112][];
+
+            int step = (int)(Math.Pow(10.0, Math.Ceiling(Math.Log10(maxVal))) / 5.0);
             int yAxis = (int)Math.Floor(Math.Log10(step * 5)) + 2;
-            Console.SetWindowSize(115 + yAxis, 32);
+
+            int pointsPerDay = 8;
+            int overlayWidth = yAxis + 1;
+            int graphWidth = pointsPerDay * 14;
+
+            Console.SetWindowSize(overlayWidth + graphWidth + 2, 29);
+
+            char[][] output = new char[112][];
             for (int i = 0; i < 112; i++)
                 output[i] = new char[25];
 
-            for (int y = 0; y < 26; y++)
+            for (int y = 0; y < 28; y++)
             {
-                for (int x = 0; x < 113 + yAxis; x++)
+                if (y == 28)
+                    Console.Write("Use arrows to navigate");
+                for (int x = 0; x < overlayWidth + graphWidth; x++)
                 {
                     if (y == 25)
-                        Console.Write(x < yAxis ? ' ': '_');
+                    {
+                        Console.Write(x < yAxis ? ' ' : '_');
+                    }
+                    else if (y == 26)
+                    {
+                        if (x < yAxis)
+                            Console.Write(' ');
+                        else if (x == yAxis)
+                            Console.Write('|');
+                        else
+                        {
+                            if ((x - overlayWidth) % pointsPerDay == 0)
+                                Console.Write(offset + (x - overlayWidth) / pointsPerDay);
+                            else
+                            {
+                                bool lil = (x - overlayWidth - 1) % pointsPerDay == 0;
+                                int lul = offset + (x - overlayWidth - 1) / pointsPerDay;
+
+                                bool lal = (x - overlayWidth - 2) % pointsPerDay == 0;
+                                int lol = offset + (x - overlayWidth - 2) / pointsPerDay;
+                                if (!(lil && Math.Log10(lul) >= 1) && !(lal && Math.Log10(lol) >= 2))
+                                    Console.Write(' ');
+                            }
+                                
+                        }
+                    }
                     else if (x < yAxis)
                     {
                         if (y == 0 || y == 5 || y == 10 || y == 15 || y == 20)
@@ -283,11 +363,92 @@ namespace Covid_Statistics
                     {
                         Console.Write('|');
                     }
+                    else
+                    {
+                        char ch;
+                        int closestIntDolu = cases[offset + (int)Math.Floor((double)(x - overlayWidth) / pointsPerDay)];
+                        int closestIntNahoru;
+                        if (offset + (int)Math.Floor((double)(x - overlayWidth) / pointsPerDay) + 1 == cases.Length)
+                            closestIntNahoru = closestIntDolu;
+                        else
+                            closestIntNahoru = cases[offset + (int)Math.Floor((double)(x - overlayWidth) / pointsPerDay) + 1];
+
+                        double blend = (double)((x - overlayWidth) % pointsPerDay) / pointsPerDay;
+                        if (blend == 0)
+                            ch = 'X';
+                        else
+                            ch = '.';
+                        int valueAtX = (int)Math.Floor((1 - blend) * closestIntDolu + blend * closestIntNahoru);
+
+                        int rowStep = step / 5;
+                        for (int i = 0; i < 25; i++)
+                        {
+                            if (i * rowStep > valueAtX)
+                            {
+                                valueAtX = i * rowStep;
+                                break;
+                            }
+                        }
+
+                        if (y == 0 || y == 5 || y == 10 || y == 15 || y == 20)
+                        {
+                            if ((25 - y) * rowStep == valueAtX)
+                                Console.Write(ch);
+                            else
+                                Console.Write('-');
+                        }
+                        else
+                        {
+                            if ((25 - y) * rowStep == valueAtX)
+                                Console.Write(ch);
+                            else
+                                Console.Write(' ');
+                        }
+                    }
                 }
                 Console.Write('\n');
             }
+        }
+        static void predict()
+        {
+            uint n;
+            char choice;
+            if (cases.Length < 15)
+                return;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Enter the number of days, on which you want to have the number of cases predicted");
+            } while (!uint.TryParse(Console.ReadLine(), out n));
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Choose a prediction method: A - using R, B - using the case ratio between weeks");
+                choice = Console.ReadKey().KeyChar;
+            } while (choice != 'a' && choice != 'b');
 
-            Console.ReadKey();
+            Array.Resize<int>(ref cases, cases.Length + (int)n);
+
+            if (choice == 'a')
+            {
+                for (int i = cases.Length - (int)n; i < cases.Length; i++)
+                {
+                    int value = (int)Math.Round((double)(cases[i - 5] + cases[i - 6] + cases[i - 7] + cases[i - 8] + cases[i - 9] + cases[i - 10] + cases[i - 11] - (cases[i - 1] + cases[i - 2] + cases[i - 3] + cases[i - 4] + cases[i - 5] + cases[i - 6])));
+                    cases[i] = value;
+                }
+                report(cases.Length - (int)n - 1, cases.Length - 1);
+                delete(cases.Length - (int)n, cases.Length - 1);
+            }
+            else
+            {
+                for (int i = cases.Length - (int)n; i < cases.Length; i++)
+                {
+                    int value = (int)((double)(cases[i - 7] * cases[i - 7]) / cases[i - 14]);
+                    cases[i] = value;
+                }
+                report(cases.Length - (int)n - 1, cases.Length - 1);
+                delete(cases.Length - (int)n, cases.Length - 1);
+            }
         }
         static void Main(string[] args)
         {
@@ -310,7 +471,29 @@ namespace Covid_Statistics
                         reportRange();
                         break;
                     case 5:
-                        graph();
+                        predict();
+                        break;
+                    case 6:
+                        int o = 0;
+                        ConsoleKey k;
+
+                        do
+                        {
+                            graph(o);
+                            k = Console.ReadKey().Key;
+
+                            if (k == ConsoleKey.LeftArrow)
+                            {
+                                if (o > 0)
+                                    o--;
+                            }
+                            else if (k == ConsoleKey.RightArrow)
+                            {
+                                if (o < cases.Length - 15)
+                                    o++;
+                            }
+                        } while (k == ConsoleKey.RightArrow || k == ConsoleKey.LeftArrow);
+
                         break;
                 }
             }

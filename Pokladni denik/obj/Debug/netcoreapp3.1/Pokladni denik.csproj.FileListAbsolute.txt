@@ -1,0 +1,14 @@
+C:\Users\david\source\repos\Pokladni denik\bin\Debug\netcoreapp3.1\Pokladni denik.exe
+C:\Users\david\source\repos\Pokladni denik\bin\Debug\netcoreapp3.1\Pokladni denik.deps.json
+C:\Users\david\source\repos\Pokladni denik\bin\Debug\netcoreapp3.1\Pokladni denik.runtimeconfig.json
+C:\Users\david\source\repos\Pokladni denik\bin\Debug\netcoreapp3.1\Pokladni denik.runtimeconfig.dev.json
+C:\Users\david\source\repos\Pokladni denik\bin\Debug\netcoreapp3.1\Pokladni denik.dll
+C:\Users\david\source\repos\Pokladni denik\bin\Debug\netcoreapp3.1\Pokladni denik.pdb
+C:\Users\david\source\repos\Pokladni denik\obj\Debug\netcoreapp3.1\Pokladni denik.csproj.AssemblyReference.cache
+C:\Users\david\source\repos\Pokladni denik\obj\Debug\netcoreapp3.1\Pokladni denik.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\david\source\repos\Pokladni denik\obj\Debug\netcoreapp3.1\Pokladni denik.AssemblyInfoInputs.cache
+C:\Users\david\source\repos\Pokladni denik\obj\Debug\netcoreapp3.1\Pokladni denik.AssemblyInfo.cs
+C:\Users\david\source\repos\Pokladni denik\obj\Debug\netcoreapp3.1\Pokladni denik.csproj.CoreCompileInputs.cache
+C:\Users\david\source\repos\Pokladni denik\obj\Debug\netcoreapp3.1\Pokladni denik.dll
+C:\Users\david\source\repos\Pokladni denik\obj\Debug\netcoreapp3.1\Pokladni denik.pdb
+C:\Users\david\source\repos\Pokladni denik\obj\Debug\netcoreapp3.1\Pokladni denik.genruntimeconfig.cache

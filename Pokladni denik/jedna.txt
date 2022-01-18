@@ -1,0 +1,6 @@
+420
+letadlo -50000 cestovani
+stonky 100000 burza
+paycheck 5000 burza
+chalec -500 necessities
+voda -8520 necessities

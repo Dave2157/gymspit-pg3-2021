@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokladni denik", "Pokladni denik.csproj", "{5253DEE8-16E5-4CB4-8D4B-58EF13253EBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5253DEE8-16E5-4CB4-8D4B-58EF13253EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5253DEE8-16E5-4CB4-8D4B-58EF13253EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5253DEE8-16E5-4CB4-8D4B-58EF13253EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5253DEE8-16E5-4CB4-8D4B-58EF13253EBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57A65703-8F0B-47F3-9B5D-79C8D9FB2254}
+	EndGlobalSection
+EndGlobal

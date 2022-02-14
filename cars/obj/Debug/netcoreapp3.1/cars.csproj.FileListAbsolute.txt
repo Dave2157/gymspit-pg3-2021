@@ -1,0 +1,14 @@
+C:\Users\david\source\repos\cars\bin\Debug\netcoreapp3.1\cars.exe
+C:\Users\david\source\repos\cars\bin\Debug\netcoreapp3.1\cars.deps.json
+C:\Users\david\source\repos\cars\bin\Debug\netcoreapp3.1\cars.runtimeconfig.json
+C:\Users\david\source\repos\cars\bin\Debug\netcoreapp3.1\cars.runtimeconfig.dev.json
+C:\Users\david\source\repos\cars\bin\Debug\netcoreapp3.1\cars.dll
+C:\Users\david\source\repos\cars\bin\Debug\netcoreapp3.1\cars.pdb
+C:\Users\david\source\repos\cars\obj\Debug\netcoreapp3.1\cars.csproj.AssemblyReference.cache
+C:\Users\david\source\repos\cars\obj\Debug\netcoreapp3.1\cars.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\david\source\repos\cars\obj\Debug\netcoreapp3.1\cars.AssemblyInfoInputs.cache
+C:\Users\david\source\repos\cars\obj\Debug\netcoreapp3.1\cars.AssemblyInfo.cs
+C:\Users\david\source\repos\cars\obj\Debug\netcoreapp3.1\cars.csproj.CoreCompileInputs.cache
+C:\Users\david\source\repos\cars\obj\Debug\netcoreapp3.1\cars.dll
+C:\Users\david\source\repos\cars\obj\Debug\netcoreapp3.1\cars.pdb
+C:\Users\david\source\repos\cars\obj\Debug\netcoreapp3.1\cars.genruntimeconfig.cache

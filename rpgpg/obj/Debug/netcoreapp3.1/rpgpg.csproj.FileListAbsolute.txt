@@ -1,0 +1,14 @@
+C:\Users\david\source\repos\rpgpg\bin\Debug\netcoreapp3.1\rpgpg.exe
+C:\Users\david\source\repos\rpgpg\bin\Debug\netcoreapp3.1\rpgpg.deps.json
+C:\Users\david\source\repos\rpgpg\bin\Debug\netcoreapp3.1\rpgpg.runtimeconfig.json
+C:\Users\david\source\repos\rpgpg\bin\Debug\netcoreapp3.1\rpgpg.runtimeconfig.dev.json
+C:\Users\david\source\repos\rpgpg\bin\Debug\netcoreapp3.1\rpgpg.dll
+C:\Users\david\source\repos\rpgpg\bin\Debug\netcoreapp3.1\rpgpg.pdb
+C:\Users\david\source\repos\rpgpg\obj\Debug\netcoreapp3.1\rpgpg.csproj.AssemblyReference.cache
+C:\Users\david\source\repos\rpgpg\obj\Debug\netcoreapp3.1\rpgpg.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\david\source\repos\rpgpg\obj\Debug\netcoreapp3.1\rpgpg.AssemblyInfoInputs.cache
+C:\Users\david\source\repos\rpgpg\obj\Debug\netcoreapp3.1\rpgpg.AssemblyInfo.cs
+C:\Users\david\source\repos\rpgpg\obj\Debug\netcoreapp3.1\rpgpg.csproj.CoreCompileInputs.cache
+C:\Users\david\source\repos\rpgpg\obj\Debug\netcoreapp3.1\rpgpg.dll
+C:\Users\david\source\repos\rpgpg\obj\Debug\netcoreapp3.1\rpgpg.pdb
+C:\Users\david\source\repos\rpgpg\obj\Debug\netcoreapp3.1\rpgpg.genruntimeconfig.cache
